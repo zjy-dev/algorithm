@@ -13,6 +13,7 @@ public:
         {
             while(stk.top() != -1 and nums[stk.top()] >= nums[i])
             {
+                //此时i为栈顶柱子右边第一根矮于它的
                 int height = nums[stk.top()];
                 stk.pop();
                 int len = i - stk.top() - 1;

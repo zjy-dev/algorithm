@@ -3,10 +3,8 @@
 class Solution {
 public:
     vector<vector<int>> graph;
-    vector<int> inDegree;
-    int cnt = 0;
-
-    bool canFinish(int n, vector<vector<int>>& pre) 
+    vector<int> ans, inDegree;
+    vector<int> findOrder(int n, vector<vector<int>>& pre) 
     {
         //½¨Í¼
         graph.resize(n);
@@ -25,7 +23,7 @@ public:
         {
             auto t = q.front();
             q.pop();
-            cnt++;
+            ans.push_back(t);
 
             for(const auto& val : graph[t])
             {
@@ -35,6 +33,8 @@ public:
             }
         }
 
-        return cnt == n;
+        if(ans.size() != n)
+            return {};
+        return ans;
     }
 };

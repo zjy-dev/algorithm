@@ -1,7 +1,6 @@
 #include"LeetCode.h"
 
-struct MyNode
-{
+struct MyNode {
     int key, val;
     MyNode* next;
     MyNode* prev;
@@ -9,64 +8,76 @@ struct MyNode
 
 class LRUCache {
 public:
-    unordered_map<int, MyNode*> hash;
+    int cap;
+    int cnt = 0;
     MyNode* head;
     MyNode* tail;
-    int cap;
-
+    unordered_map<int, MyNode*> hash;
     LRUCache(int capacity) {
         this->cap = capacity;
         this->head = new MyNode({0, 0, NULL, NULL});
         this->tail = new MyNode({0, 0, NULL, NULL});
         head->next = tail;
-        tail->prev = head;
+        tail->next = head;
     }
     
     int get(int key) {
-        if(!hash.count(key))
+        if (hash.count(key) == 0) {
             return -1;
+        }
+
+        // 将最活跃的元素从当前位置删除
+        auto t = hash[key];
+        t->prev->next = t->next;
+        t->next->prev = t->prev;
         
-        auto val = hash[key];
+        // 将最活跃的元素添加到表头
+        t->next = head->next;
+        t->prev = head;
+        head->next->prev = t;
+        head->next = t;
 
-        //delete
-        val->prev->next = val->next;
-        val->next->prev = val->prev;
-
-        //addAtTail
-        val->prev = tail->prev;
-        val->next = tail;
-        val->prev->next = val;
-        tail->prev = val;
-
-        return val->val;
+        return hash[key]->val;
     }
     
     void put(int key, int value) {
-        MyNode* val;
-        if(hash.count(key))
-        {
-            val = hash[key];
-            val->val = value;
-            val->prev->next = val->next;
-            val->next->prev = val->prev;
-        }
-        else
-        {
-            if(this->cap == this->hash.size())
-            {
-                cout << "value = " << this->head->next->val << endl;
-                hash.erase(this->head->next->key);
-                head->next = head->next->next;
-                head->next->prev = head;
+        // 缓存中已经有key了, 更新即可
+        if (hash.count(key) == 1) {
+            // 将最活跃的元素从当前位置删除
+            auto t = hash[key];
+            t->prev->next = t->next;
+            t->next->prev = t->prev;
+            
+            // 将最活跃的元素添加到表头
+            t->next = head->next;
+            t->prev = head;
+            head->next->prev = t;
+            head->next = t;
+
+            // 更新其值
+            hash[key]->val = value;
+        } else { // 没有此key, 则添加
+
+            // 如果LRU满了, 要删除最不活跃的元素
+            if (this->cap == this->cnt) {
+                // 将最不活跃的表尾元素从哈希表和链表删除
+                hash.erase(tail->prev->key);
+                tail->prev->prev->next = tail;
+                tail->prev = tail->prev->prev;
+            } else {
+                this->cnt++;
             }
-            val = new MyNode({key, value});
-            hash[key] = val;
+
+            // 将新元素添加到哈希表
+            auto t = new MyNode({key, value, NULL, NULL});
+            hash[key] = t;
+
+            // 将新元素添加到表头
+            t->next = head->next;
+            t->prev = head;
+            head->next->prev = t;
+            head->next = t;
         }
-        
-        //addAtTail
-        val->prev = tail->prev;
-        val->next = tail;
-        val->prev->next = val;
-        tail->prev = val;
     }
 };
+

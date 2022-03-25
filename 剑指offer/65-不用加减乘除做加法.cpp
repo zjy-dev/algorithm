@@ -2,16 +2,17 @@
 
 class Solution {
 public:
-    int add(int a, int b) 
-    {
-        //没有进位了, 停止迭代
-        while(b)
-        {
-            //c为a, b的进位和
+    int add(int a, int b) {
+
+        // 进位为0就可以结束了
+        while (b != 0) {
+            // c为无进位和
             int c = (unsigned)(a & b) << 1;
-            //a为无进位和
+            
+            // a为无进位和
             a ^= b;
-            //b为进位和
+
+            // b更新为进位
             b = c;
         }
 

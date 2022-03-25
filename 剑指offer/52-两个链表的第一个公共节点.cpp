@@ -1,23 +1,36 @@
 #include"LeetCode.h"
 
-class Solution{
+class Solution {
 public:
-    int getLen(ListNode* head)
-    {
-        int ans = 0;
-        for(; head; head = head->next, ans++);
-        return ans;
-    }
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        auto lenA = getLen(headA), lenB = getLen(headB);
-        if(lenA > lenB)
-            swap(headA, headB), swap(lenA, lenB);
-        
-        for(int i = 0; i < lenB - lenA; i++)
+        int lenA = getLen(headA), lenB = getLen(headB);
+
+        // 让lenA >= lenB
+        if (lenA < lenB) {
+            return getIntersectionNode(headB, headA);
+        } 
+
+        // A先往后走lenA - lenB步
+        for (int i = lenA - lenB; i != 0; i--) {
+            headA = headA->next;
+        }
+
+        // 共同往后走, 直到找到相同的结点
+        while (headA != headB) {
+            headA = headA->next;
             headB = headB->next;
-        while(headA != headB)
-            headA = headA->next, headB = headB->next;
-        
+        }
+
         return headA;
+    }
+
+    int getLen(ListNode *head) {
+        int ans = 0;
+        while (head != NULL) {
+            head = head->next;
+            ans++;
+        }
+
+        return ans;
     }
 };

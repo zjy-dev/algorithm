@@ -1,32 +1,45 @@
 #include"LeetCode.h"
 
-class Solution{
+class Solution {
 public:
-    int search(vector<int>& nums, int val) 
-    {
+    int search(vector<int>& nums, int tar) {
+        // 判空
+        if (nums.size() == 0) {
+            return 0;
+        }
+
         int n = nums.size();
-        if(!n)
-            return 0;
-        int subL;
+
+        // 从左往右寻找第一个大于等于tar的数
         int l = 0, r = n - 1, mid;
-        while(l < r)
-            if(nums[mid = (l + r) >> 1] >= val)
+        while (l < r) {
+            if (nums[mid = (l + r) >> 1] >= tar) {
                 r = mid;
-            else
+            } else {
                 l = mid + 1;
-        
-        if(nums[l] != val)
+            }
+        }
+
+        // 特判数组中没有该元素的情况
+        if (nums[l] != tar) {
             return 0;
-        subL = l;
+        }
 
+        // 记录左区间
+        int ansL = l;
+
+        // 从右往左寻找第一个小于等于tar的数
         l = 0, r = n - 1;
-        while(l < r)
-            if(nums[mid = (l + r + 1) >> 1] > val)
-                r = mid - 1;
-            else
+        while (l < r) {
+            if (nums[mid = (l + r + 1) >> 1] <= tar) {
                 l = mid;
-        
+            } else {
+                r = mid - 1;
+            }
+        }
 
-        return l - subL + 1;
+        // 记录右端点
+        int ansR = l;
+        return ansR - ansL + 1;
     }
 };

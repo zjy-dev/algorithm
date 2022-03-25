@@ -14,13 +14,12 @@ public:
                     pre[i][j] = (j ? pre[i][j - 1] + 1 : 1);
 
         int ans = INT_MIN;
-        //将每一列看成柱状图去操作, 就可以使用单调栈优化
+
         for(int c = 0; c < n; c++)
         {
             stack<int> stk;
             stk.push(-1);
 
-            //枚举每一行
             for(int r = 0; r < m; r++)
             {
                 while(stk.top() != -1 and pre[stk.top()][c] >= pre[r][c])

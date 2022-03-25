@@ -1,26 +1,32 @@
 #include"LeetCode.h"
 
-
 class CQueue {
 public:
-    stack<int> s1, s2;
-    CQueue() {}
+    // 两个栈
+    stack<int> stk1, stk2;
     
-    void appendTail(int val) {
-        s1.push(val);
+    // push就直接往stk1里push即可
+    void appendTail(int value) {
+        stk1.push(value);
     }
     
+    // pop要分情况讨论, 基本思路是将stk1通过stk2翻个底朝天
     int deleteHead() {
-        if(s2.empty())
-            while(s1.size())
-                s2.push(s1.top()), s1.pop();
-        if(s2.size())
-        {
-            auto ans = s2.top();
-            s2.pop();
+        if (stk2.size() != 0) { // 如果stk2还没出完队, 就直接出队
+            int ans = stk2.top();
+            stk2.pop();
             return ans;
+        } else if (stk1.size() != 0) { // 否则如果stk1中有元素, 就翻个底朝天, 然后出队
+            while (!stk1.empty()) {
+                int t = stk1.top();
+                stk1.pop();
+                stk2.push(t);
+            }
+            // 投机取巧行为
+            return deleteHead();
         }
-        else
-            return -1;
+
+        // 空队列, 根据题目要求返回-1
+        return -1;
     }
 };

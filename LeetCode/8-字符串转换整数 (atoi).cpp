@@ -33,8 +33,4 @@ public:
     }
 };
 
-int main(int argc, char const *argv[])
-{
-    cout << Solution().myAtoi("42");
-    return 0;
-}
+

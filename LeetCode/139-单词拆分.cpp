@@ -2,29 +2,35 @@
 
 class Solution {
 public:
-    bool wordBreak(string s, vector<string>& dict) 
-    {
+    bool wordBreak(string s, vector<string>& wordDict) {
         int n = s.size();
-        if(!n)
-            return false;
-        
-        //dp[i]表示s[0 ~ i]可以满足题目条件
-        vector<bool> dp(n);
+        s = " " + s;
+
+        // dp[k]表示s[:k]能不能满足题干条件
+        // 所以答案就是dp[n]
+        vector<bool> dp(n + 1, false);
+
+        // 快速判断某个字符串有没有在dict中出现
         unordered_set<string> hash;
-        for(const auto& s : dict)
-            hash.insert(s);
+        for (const auto& val : wordDict) {
+            hash.insert(val);
+        }
 
-        //边界
-        dp[0] = hash.count(s.substr(0, 1));
+        // dp边界
+        dp[0] = true;
 
-        for(int i = 1; i < n; i++)
-            for(int j = -1; j < i; j++)//对每一个从头开始的子串, 对每一个位置进行分隔, 尽可能让它满足题目条件
-            {
-                dp[i] = (j == -1 ? true : dp[j]) and hash.count(s.substr(j + 1, i - j));
-                if(dp[i])
+        for (int i = 1; i <= n; i++) {
+            // 以j为分界点, 如果dp[j]满足, 则尝试使用dict中的单词匹配
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && hash.count(s.substr(j + 1, i - j))) {
+                    dp[i] = true;
+
+                    // 有一种方案匹配成功了就可以
                     break;
+                }
             }
-        
-        return dp[n - 1];
+        }
+
+        return dp[n];
     }
-};  
+};

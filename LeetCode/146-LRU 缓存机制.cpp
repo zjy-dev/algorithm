@@ -1,82 +1,82 @@
 #include"LeetCode.h"
 
-struct MyNode {
+struct Node {
+    Node *pre, *next;
+
+    // è®°å½•keyæ˜¯ä¸ºäº†åˆ é™¤çš„æ—¶å€™æ–¹ä¾¿
     int key, val;
-    MyNode* next;
-    MyNode* prev;
 };
 
 class LRUCache {
 public:
-    int cap;
-    int cnt = 0;
-    MyNode* head;
-    MyNode* tail;
-    unordered_map<int, MyNode*> hash;
+    int cap, cnt;
+    unordered_map<int, Node*> hash;
+    Node *head, *tail;
+
     LRUCache(int capacity) {
         this->cap = capacity;
-        this->head = new MyNode({0, 0, NULL, NULL});
-        this->tail = new MyNode({0, 0, NULL, NULL});
-        head->next = tail;
-        tail->next = head;
+        this->cnt = 0;
+        this->head = new Node({NULL, NULL, 0, 0});
+        this->tail = new Node({NULL, NULL, 0, 0});
+        this->head->next = tail, this->tail->pre = head;
     }
     
     int get(int key) {
+        // ä¸å­˜åœ¨, å°±è¿”å›ž-1
         if (hash.count(key) == 0) {
             return -1;
         }
 
-        // ½«×î»îÔ¾µÄÔªËØ´Óµ±Ç°Î»ÖÃÉ¾³ý
+        // å­˜åœ¨, åˆ™æ›´æ–°å…¶ä½ç½®åˆ°è¡¨å¤´
         auto t = hash[key];
-        t->prev->next = t->next;
-        t->next->prev = t->prev;
-        
-        // ½«×î»îÔ¾µÄÔªËØÌí¼Óµ½±íÍ·
-        t->next = head->next;
-        t->prev = head;
-        head->next->prev = t;
-        head->next = t;
 
-        return hash[key]->val;
+        // ä»Žå½“å‰ä½ç½®åˆ é™¤
+        t->pre->next = t->next, t->next->pre = t->pre;
+
+        // å¤´æ’
+        t->next = head->next, t->pre = head;
+        head->next = t;
+        t->next->pre = t;
+
+        return t->val;
     }
     
     void put(int key, int value) {
-        // »º´æÖÐÒÑ¾­ÓÐkeyÁË, ¸üÐÂ¼´¿É
+        // è‹¥å­˜åœ¨, åˆ™æ›´æ–°å…¶ä½ç½®
         if (hash.count(key) == 1) {
-            // ½«×î»îÔ¾µÄÔªËØ´Óµ±Ç°Î»ÖÃÉ¾³ý
             auto t = hash[key];
-            t->prev->next = t->next;
-            t->next->prev = t->prev;
-            
-            // ½«×î»îÔ¾µÄÔªËØÌí¼Óµ½±íÍ·
-            t->next = head->next;
-            t->prev = head;
-            head->next->prev = t;
+
+            // ä»Žå½“å‰ä½ç½®åˆ é™¤
+            t->pre->next = t->next, t->next->pre = t->pre;
+
+            // å¤´æ’
+            t->next = head->next, t->pre = head;
             head->next = t;
+            t->next->pre = t;
 
-            // ¸üÐÂÆäÖµ
-            hash[key]->val = value;
-        } else { // Ã»ÓÐ´Ëkey, ÔòÌí¼Ó
+            // æ›´æ–°å…¶å€¼
+            t->val = value;
 
-            // Èç¹ûLRUÂúÁË, ÒªÉ¾³ý×î²»»îÔ¾µÄÔªËØ
-            if (this->cap == this->cnt) {
-                // ½«×î²»»îÔ¾µÄ±íÎ²ÔªËØ´Ó¹þÏ£±íºÍÁ´±íÉ¾³ý
-                hash.erase(tail->prev->key);
-                tail->prev->prev->next = tail;
-                tail->prev = tail->prev->prev;
+        } else { // ä¸å­˜åœ¨
+
+            // å¦‚æžœæ»¡äº†, å°±è¦åˆ é™¤æœ€ä¸æ´»è·ƒçš„è¡¨å°¾å…ƒç´ 
+            if (this->cnt == cap) {
+                // ä½“çŽ°å‡ºè®°å½•keyçš„å¥½å¤„
+                hash.erase(tail->pre->key);
+                tail->pre = tail->pre->pre, tail->pre->next = tail;
             } else {
                 this->cnt++;
             }
+            
 
-            // ½«ÐÂÔªËØÌí¼Óµ½¹þÏ£±í
-            auto t = new MyNode({key, value, NULL, NULL});
-            hash[key] = t;
-
-            // ½«ÐÂÔªËØÌí¼Óµ½±íÍ·
-            t->next = head->next;
-            t->prev = head;
-            head->next->prev = t;
+            // å¤´æ’
+            auto t = new Node({NULL, NULL, key, value});
+            t->next = head->next, t->pre = head;
             head->next = t;
+            t->next->pre = t;
+
+            // åŠ å…¥åˆ°å“ˆå¸Œè¡¨
+            hash[key] = t;
         }
     }
 };

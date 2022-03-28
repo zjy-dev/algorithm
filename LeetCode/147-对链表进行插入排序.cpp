@@ -2,32 +2,35 @@
 
 class Solution {
 public:
-    ListNode* insertionSortList(ListNode* head) 
-    {
-        if(!head)
-            return NULL;
-        
+    ListNode* sortList(ListNode* head) {
         auto ans = new ListNode(0, head);
-        auto tail = head, p = head->next;//进入循环时p始终在tail后面一个
-        while(p)
-        {
-            if(tail->val <= p->val)
-                tail = p;
-            else
-            {
-                auto pre = ans;
-                while(pre->next->val < p->val)
-                    pre = pre->next;
-                
-                //下一个未排好的就是p->next
-                tail->next = p->next;
 
-                p->next = pre->next;
-                pre->next = p;
+        auto sorted = head;
+        
+        // soered->next 非空则说明还未排序完
+        while (sorted != NULL && sorted->next != NULL) {
+            // 下一个要插入排序的元素p
+            auto p = sorted->next;
+
+            // 已经递增就别插入了
+            if (p->val >= sorted->val) { 
+                sorted = sorted->next;
+                continue;
+            }
+            
+            // 找到要插入的位置
+            auto t = ans;
+            while (t->next->val < p->val) {
+                t = t->next;
             }
 
-            p = tail->next;
+            // 从原链表删除p
+            sorted->next = sorted->next->next;
+
+            // 将p插入
+            p->next = t->next, t->next = p;
         }
+
         return ans->next;
     }
 };

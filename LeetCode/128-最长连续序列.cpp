@@ -2,25 +2,29 @@
 
 class Solution {
 public:
-    int longestConsecutive(vector<int>& nums) 
-    {
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> s;
         int ans = 0;
-        int n = nums.size();
+        for (const auto& val : nums) {
+            s.insert(val);
+        } 
 
-        unordered_set<int> hash;
-        for(int i = 0; i < n; i++)
-            hash.insert(nums[i]);
-        
-        for(auto val : hash)
-        {
-            if(hash.count(val - 1))
+        for (const auto& val : s) {
+            // 只从最小的开始遍历
+            if (s.count(val - 1) == 1) {
                 continue;
-            int t = 0;
-            while(hash.count(val + 1))
-                t++, val++;
-            ans = max(ans, t);
-        }
+            }
 
+            int len = 1, t = val;
+            while (s.count(t + 1) == true) {
+                // 加快遍历
+                s.erase(t + 1);
+                len++, t++;
+            }
+
+            ans = max(ans, len);
+        }
+        
         return ans;
-    }   
+    }
 };

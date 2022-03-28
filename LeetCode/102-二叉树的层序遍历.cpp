@@ -1,28 +1,36 @@
 #include"LeetCode.h"
 
-class Solution{
+class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        if(!root)
+        if (root == NULL) {
             return {};
-        
+        }
+
         vector<vector<int>> ans;
         queue<TreeNode*> q;
         q.push(root);
-        while(q.size())
-        {
-            vector<int> v;
-            for(int i = q.size(); i; i--)
-            {
-                auto t = q.front();
-                q.pop();       
-                v.push_back(t->val);
-                if(t->left)
-                    q.push(t->left);
-                if(t->right)
-                    q.push(t->right);
+
+        while (q.empty() == false) {
+            int t = q.size();
+            vector<int> temp;
+
+            // 直接遍历一层t个结点
+            for (int i = 0; i < t; i++) {
+                auto node = q.front();
+                temp.push_back(node->val);
+                q.pop();
+
+                // 非空才push
+                if (node->left != NULL) {
+                    q.push(node->left);
+                }
+                if (node->right != NULL) {
+                    q.push(node->right);
+                }
             }
-            ans.push_back(v);
+
+            ans.push_back(temp);
         }
 
         return ans;

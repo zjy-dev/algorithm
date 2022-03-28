@@ -1,62 +1,61 @@
 #include"LeetCode.h"
 
-const int X[4] = {0, 0, 1, -1}, Y[4] = {1, -1, 0, 0};
-
-class Solution{
+class Solution {
 public:
-    string word;
-    int n, r, c;
-    vector<vector<char>> board;
+    const int X[4] = {0, 0, 1, -1};
+    const int Y[4] = {1, -1, 0, 0};
     vector<vector<bool>> vis;
+    string s;
+    int row, col;
+    bool exist(vector<vector<char>>& arr, string word) {
+        this->s = word;
+        this->row = arr.size(), this->col = arr[0].size();
 
-    bool exist(vector<vector<char>>& board, string word) 
-    {
-        this->word = word;
-        this->n = word.size();
-        this->board = board;
-        this->r = board.size(), this->c = board[0].size();
-        vis = vector<vector<bool>>(r, vector<bool>(c, false));
+        vis = vector<vector<bool>>(row + 1, vector<bool>(col + 1, false));
 
-        for(int i = 0; i < r; i++)
-            for(int j = 0; j < c; j++)
-            {
-                if (dfs(i, j, 0))
+        // 尝试以每个位置为起点进行dfs
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                // 只要一个位置成功了, 就是真的成功了, 直接return
+                if (dfs(arr, i, j, 0) == true) {
                     return true;
-            }
-            
-        return false;
-    }
-
-    bool dfs(int i, int j, int idx)
-    {   
-        if(word[idx] != board[i][j])
-            return false;
-        else if(idx == n - 1)
-            return true;
-
-        vis[i][j] = true;
-        bool ans = false;
-        for(int t = 0; t < 4; t++)
-        {
-            auto x = i + X[t], y = j + Y[t];
-            if(x < 0 or x >= r or y < 0 or y >= c or vis[x][y])
-                continue;
-            
-            if (dfs(x, y, idx + 1))
-            {
-                ans = true;
-                break;
+                }
             }
         }
 
-        vis[i][j] = false;
-        return ans;
+        // 所有位置都没成功, return false
+        return false;
+    }
+
+    bool dfs(vector<vector<char>>& arr, int r, int c, int idx) {
+        // 递归边界
+        if (idx == s.size() - 1 && s[idx] == arr[r][c]) {
+            return true;
+        }
+
+        // 剪枝, 此路不通
+        if (arr[r][c] != s[idx]) {
+            return false;
+        }
+
+        vis[r][c] = true;
+
+        for (int i = 0; i < 4; i++) {
+            int tx = r + X[i], ty = c + Y[i];
+
+            // 经典dfs
+            if (tx < 0 || tx >= row || ty < 0 || ty >= col || vis[tx][ty]) {
+                continue;
+            }
+            if (dfs(arr, tx, ty, idx + 1) == true) {
+                return true;
+            }
+        }
+
+        // 回溯法, 恢复现场
+        vis[r][c] = false;
+
+        // 所有路都没走通
+        return false;
     }
 };
-
-int main(int argc, char const *argv[])
-{
-    vector<vector<char>> v(1, vector<char>{'a'});
-    cout << Solution().exist(v, "a");
-    return 0;
-}

@@ -10,14 +10,14 @@ public:
     int movingCount(int m, int n, int k) {
         vis = vector<vector<bool>>(m, vector<bool>(n, false));
 
-        // Ô¤´¦Àí²»ÄÜ×ßµÄ¸ñ×Ó
+        // é¢„å¤„ç†ä¸èƒ½èµ°çš„æ ¼å­
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 vis[i][j] = !judge(k, i, j);
             }
         }
 
-        // (0, 0)¸ñÒ²ÒªÅĞ¶ÏÒ»ÏÂÄÜ²»ÄÜ×ß
+        // (0, 0)æ ¼ä¹Ÿè¦åˆ¤æ–­ä¸€ä¸‹èƒ½ä¸èƒ½èµ°
         if (vis[0][0] == false) {
             dfs(0, 0, m, n);
         }
@@ -26,15 +26,15 @@ public:
     }
 
     void dfs(int x, int y, const int m, const int n) {
-        // Õâ¸ö¸ñ×Ó×ß¹ıÁË, ±ê¼ÇÒ»ÏÂ
+        // è¿™ä¸ªæ ¼å­èµ°è¿‡äº†, æ ‡è®°ä¸€ä¸‹
         ans++;
         vis[x][y] = true;
 
         for (int i = 0; i < 4; i++) {
             int tx = x + X[i], ty = y + Y[i];
 
-            // Óöµ½vis = trueµÄ¸ñ×Ó¾ÍÍ£ÏÂ
-            // ²»ÓÃµ£ĞÄÂ©´ğ°¸, µÚÒ»´Î×ßµ½Õâ¸ö¸ñ×ÓµÄÂ·ÏßÔç¾Í¿¼ÂÇ¹ı×ßµ½Õâ¸ö¸ñ×ÓºóµÄËùÓĞÇé¿öÁË
+            // é‡åˆ°vis = trueçš„æ ¼å­å°±åœä¸‹
+            // ä¸ç”¨æ‹…å¿ƒæ¼ç­”æ¡ˆ, ç¬¬ä¸€æ¬¡èµ°åˆ°è¿™ä¸ªæ ¼å­çš„è·¯çº¿æ—©å°±è€ƒè™‘è¿‡èµ°åˆ°è¿™ä¸ªæ ¼å­åçš„æ‰€æœ‰æƒ…å†µäº†
             if (tx < 0 || tx >= m || ty < 0 || ty >= n || vis[tx][ty]) {
                 continue;
             }
@@ -43,7 +43,7 @@ public:
         }
     }
 
-    // ÓĞÊÖ¾ÍĞĞµÄjudgeº¯Êı
+    // æœ‰æ‰‹å°±è¡Œçš„judgeå‡½æ•°
     bool judge(int k, int x, int y) {
         int cnt = 0;
         while (x != 0) {

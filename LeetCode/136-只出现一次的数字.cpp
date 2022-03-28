@@ -1,13 +1,14 @@
 #include"LeetCode.h"
 
-class Solution{
+class Solution {
 public:
-    int singleNumber(vector<int>& nums) 
-    {
+    int singleNumber(vector<int>& nums) {
         int ans = 0;
-        for(const auto& val : nums)
+        // a ^ a = 0
+        for (const auto& val : nums) {
             ans ^= val;
-        
+        }
+
         return ans;
     }
 };

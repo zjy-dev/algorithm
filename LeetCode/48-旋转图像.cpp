@@ -2,17 +2,22 @@
 
 class Solution {
 public:
-    void rotate(vector<vector<int>>& nums) 
-    {
-        int n = nums.size();
-        //水平翻转
-        for(int i = 0; i < (n >> 1); i++)
-            for(int j = 0; j < n; j++)
-                swap(nums[i][j], nums[n - i - 1][j]);
-        
-        //主对角线翻转(左上--右下)
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < i; j++)
-                swap(nums[i][j], nums[j][i]);
+    void rotate(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+
+        // 1.沿着水平轴翻转
+        for (int r = 0; r < (n >> 1); r++) {
+            for (int c = 0; c < n; c++) {
+                swap(matrix[r][c], matrix[n - r - 1][c]);
+            }
+        }
+
+        // 2.沿着主对角线翻转(左上--右下)
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < r; c++) {
+                swap(matrix[r][c], matrix[c][r]);
+            }
+        }
+
     }
 };

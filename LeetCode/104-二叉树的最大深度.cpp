@@ -1,17 +1,26 @@
-#include"LeetCode.h"
+#include "LeetCode.h"
 
 class Solution {
 public:
-    int maxDepth(TreeNode* root) 
-    {
-        return dfs(root);
+    int ans = 0;
+    int maxDepth(TreeNode* root) {
+        dfs(root, 1);
+
+        return ans;
     }
 
-    int dfs(TreeNode* root)
-    {
-        if(!root)
-            return 0;
-        
-        return max(dfs(root->left), dfs(root->right)) + 1;
+    void dfs(TreeNode* root, int depth) {
+        if (root == NULL) {
+            return;
+        }
+
+        // 更新答案
+        if (depth > ans) {
+            ans = depth;
+        }
+
+        // 递归搜索左右子树
+        dfs(root->left, depth + 1);
+        dfs(root->right, depth + 1);
     }
 };

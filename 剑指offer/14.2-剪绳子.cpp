@@ -2,8 +2,8 @@
 
 
 /**
- * Ê±¼ä¸´ÔÓ¶È -> O(logn), ¿ìËÙÃİ
- * ¿Õ¼ä¸´ÔÓ¶È -> O(1)
+ * æ—¶é—´å¤æ‚åº¦ -> O(logn), å¿«é€Ÿå¹‚
+ * ç©ºé—´å¤æ‚åº¦ -> O(1)
  */
 typedef long long LL;
 const int mod = 1e+9 + 7;
@@ -11,24 +11,24 @@ const int mod = 1e+9 + 7;
 class Solution {
 public:
     int cuttingRope(int n) {
-        // Èç¹ûn % 3 != 1, Ôò·Ö¾¡¿ÉÄÜ¶àµÄ3
+        // å¦‚æœn % 3 != 1, åˆ™åˆ†å°½å¯èƒ½å¤šçš„3
         int cnt3 = n / 3;
 
-        // Èç¹ûn % 3 == 1, Ôò°Ñ×îºóÒ»¸ö3ºÍ1¼ÓÔÚÒ»Æğ±ä³É4, ÒòÎª3 * 1 < 4
+        // å¦‚æœn % 3 == 1, åˆ™æŠŠæœ€åä¸€ä¸ª3å’Œ1åŠ åœ¨ä¸€èµ·å˜æˆ4, å› ä¸º3 * 1 < 4
         if (n % 3 == 1) {
             cnt3--;
         }
 
         int ans = quick_mi(3, cnt3, mod);
         int t = n - cnt3 * 3;
-        // t¿ÉÄÜµÄÈ¡ÖµÓĞ0, 2, 4
+        // tå¯èƒ½çš„å–å€¼æœ‰0, 2, 4
         if (t != 0) {
             ans = (LL)ans * t % mod;
         }
         return ans;
     }
 
-    // lognµÄÊ±¼ä¸´ÔÓ¶ÈÇó³ö(m ^ n) % mod 
+    // lognçš„æ—¶é—´å¤æ‚åº¦æ±‚å‡º(m ^ n) % mod 
     int quick_mi(int m, int n, int mod) {
         int ans = 1, t = m;
         while (n) {

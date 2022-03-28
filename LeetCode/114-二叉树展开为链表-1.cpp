@@ -2,29 +2,30 @@
 
 class Solution {
 public:
-    void flatten(TreeNode* root) 
-    {
-        dfs(root);
-    }
-
-    void dfs(TreeNode* root)
-    {
-        if(!root)
-            return;
-        if(!root->left)
-        {
-            dfs(root->right);
+    vector<TreeNode*> v;
+    void flatten(TreeNode* root) {
+        if (root == NULL) {
             return;
         }
-        
-        auto tailL = root->left;
-        while(tailL->right)
-            tailL = tailL->right;
-        tailL->right = root->right;
 
-        root->right = root->left;
-        root->left = NULL;
-        
+        // 先序遍历
+        dfs(root);
+
+        // 然后串起来
+        for (int i = 0; i < v.size() - 1; i++) {
+            cout << i << " " << v.size() - 1;
+            v[i]->left = NULL;
+            v[i]->right = v[i + 1];
+        }
+    }
+
+    void dfs(TreeNode *root) {
+        if (root == NULL) {
+            return;
+        }
+
+        v.push_back(root);
+        dfs(root->left);
         dfs(root->right);
     }
 };

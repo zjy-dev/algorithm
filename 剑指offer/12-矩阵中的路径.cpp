@@ -4,20 +4,20 @@ const int X[4] = {0, 0, 1, -1}, Y[4] = {1, -1, 0, 0};
 
 class Solution {
 public:
-    // ¼ò»¯dfsµÄ´«²Î
+    // ç®€åŒ–dfsçš„ä¼ å‚
     string str;
     int n, r, c;
 
-    // ÒªÏë²»×ß»ØÍ·Â·, ¾ÍĞèÒªvisÊı×é
+    // è¦æƒ³ä¸èµ°å›å¤´è·¯, å°±éœ€è¦visæ•°ç»„
     vector<vector<bool>> vis;
 
     bool exist(vector<vector<char>>& board, string word) {
-        // ³õÊ¼»¯
+        // åˆå§‹åŒ–
         str = word, n = str.size();
         r = board.size(), c = board[0].size();
         vis = vector<vector<bool>>(r, vector<bool>(c, false));
 
-        // ÒÔÃ¿¸öÎ»ÖÃÎª¿ªÍ·, ³¢ÊÔËÑË÷, ËÑ³É¹¦Ò»´Î¼´¿Éreturn true
+        // ä»¥æ¯ä¸ªä½ç½®ä¸ºå¼€å¤´, å°è¯•æœç´¢, æœæˆåŠŸä¸€æ¬¡å³å¯return true
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
                 if (dfs(board, 0, i, j) == true) {
@@ -26,41 +26,41 @@ public:
             }
         }
 
-        // Ã»ËÑµ½
+        // æ²¡æœåˆ°
         return false;
     }
 
     bool dfs(vector<vector<char>>& arr, int pos, int x, int y) {
-        if (arr[x][y] != str[pos]) { // Â·×ß²»Í¨, return false
+        if (arr[x][y] != str[pos]) { // è·¯èµ°ä¸é€š, return false
             return false;
         } 
         
         if (pos == n - 1 && arr[x][y] == str[pos]) {
-            // ×îºóÒ»¸ö×Ö·ûÒ²Ò»Ñù, return true
-            // ×¢Òâ "&& arr[x][y] == str[pos]" ¿ÉÒÔ²»Ğ´, ÕâÀïÊÇÎªÁËÂß¼­ÇåÎú
+            // æœ€åä¸€ä¸ªå­—ç¬¦ä¹Ÿä¸€æ ·, return true
+            // æ³¨æ„ "&& arr[x][y] == str[pos]" å¯ä»¥ä¸å†™, è¿™é‡Œæ˜¯ä¸ºäº†é€»è¾‘æ¸…æ™°
             return true;
         }
 
-        // ·ÀÖ¹½ÓÏÂÀ´×ß»ØÍ·Â·¶øÎŞÏŞµİ¹é, ×îÖÕµ¼ÖÂÕ»Òç³ö
+        // é˜²æ­¢æ¥ä¸‹æ¥èµ°å›å¤´è·¯è€Œæ— é™é€’å½’, æœ€ç»ˆå¯¼è‡´æ ˆæº¢å‡º
         vis[x][y] = true;
 
         for (int i = 0; i < 4; i++) {
             int tx = x + X[i], ty = y + Y[i];
-            // ¾­µäĞ£²Î
+            // ç»å…¸æ ¡å‚
             if (tx < 0 || tx >= r || ty < 0 || ty >= c || vis[tx][ty] == true) {
                 continue;
             }
 
-            // ÕâÌõÂ·×ßÍ¨ÁË, Ö±½Óreturn true, ¼ôÖ¦
+            // è¿™æ¡è·¯èµ°é€šäº†, ç›´æ¥return true, å‰ªæ
             if (dfs(arr, pos + 1, tx, ty) == true) {
                 return true;
             }
         }
 
-        // »ØËİ·¨µÄ»Ö¸´ÏÖ³¡
+        // å›æº¯æ³•çš„æ¢å¤ç°åœº
         vis[x][y] = false;
 
-        // ÕâÌõÂ·µÄËùÓĞ·ÖÂ·¶¼×ß²»Í¨
+        // è¿™æ¡è·¯çš„æ‰€æœ‰åˆ†è·¯éƒ½èµ°ä¸é€š
         return false;
     }
 };

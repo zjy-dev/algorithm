@@ -2,33 +2,34 @@
 
 class Solution {
 public:
-    int n;
-    vector<int> nums, temp;
     vector<vector<int>> ans;
-    vector<vector<int>> combinationSum(vector<int>& nums, int target) 
-    {
-        n = nums.size();
-        this->nums = nums;
+    vector<int> temp;
+    vector<vector<int>> combinationSum(vector<int>& nums, int tar) {
+        if (nums.size() == 0) {
+            return {};
+        }
 
-        dfs(0, target);
+        dfs(nums, tar, 0);
         return ans;
     }
 
-    void dfs(int pos, int x)
-    {
-        if(!x)
-        {
+    // 以选和不选为依据来dfs
+    void dfs(vector<int>& nums, int val, int idx) {
+        if (val == 0) {
             ans.push_back(temp);
             return;
         }
 
-        if(pos >= n or x < 0)
+        if (idx == nums.size() || val < 0) {
             return;
+        }
 
-        temp.push_back(nums[pos]);
-        dfs(pos, x - nums[pos]);
+        // 选idx
+        temp.push_back(nums[idx]);
+        dfs(nums, val - nums[idx], idx);
         temp.pop_back();
 
-        dfs(pos + 1, x);
+        // 不选idx
+        dfs(nums, val, idx + 1);
     }
 };

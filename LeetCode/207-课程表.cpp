@@ -2,36 +2,42 @@
 
 class Solution {
 public:
-    vector<vector<int>> graph;
+    vector<vector<int>> g;
     vector<int> inDegree;
-    int cnt = 0;
-
-    bool canFinish(int n, vector<vector<int>>& pre) 
-    {
-        //½¨Í¼
-        graph.resize(n);
+    bool canFinish(int n, vector<vector<int>>& prerequisites) {
+        // æ€è·¯æ˜¯æ‰¾å‡ºæ‹“æ‰‘åºåˆ—, å¦‚æœæ‹“æ‰‘åºåˆ—çš„é•¿åº¦æ˜¯n, å°±æ²¡é—®é¢˜ 
+        g.resize(n);
         inDegree.resize(n);
-        for(const auto& e : pre)
-            graph[e[1]].push_back(e[0]), inDegree[e[0]]++;
-        
-        //³õÊ¼½«Èë¶ÈÎª0µÄ½áµãÈë¶Ó
+
+        // å»ºå›¾å’Œåˆå§‹åŒ–å…¥åº¦
+        for (const auto& val : prerequisites) {
+            // æœ‰å‘è¾¹æ˜¯ä»val[1]æŒ‡å‘val[0]çš„
+            g[val[1]].push_back(val[0]);
+            inDegree[val[0]]++;
+        }
+
+        // åˆå§‹åŒ–bfsé˜Ÿåˆ—
         queue<int> q;
-        for(int i = 0; i < n; i++)
-            if(!inDegree[i])
+        for (int i = 0; i < n; i++) {
+            if (inDegree[i] == 0) {
                 q.push(i);
-        
-        //²»¶Ï½«¶ÔÍ·½áµãµÄËùÓĞ³ö±ßµÄÈë¶È¼õÒ», È»ºóÎª0¾ÍÈë¶Ó
-        while(q.size())
-        {
+            }
+        }
+
+        // è®°å½•æ‹“æ‰‘åºåˆ—çš„é•¿åº¦
+        int cnt = 0;
+
+        // bfsæ±‚æ‹“æ‰‘åºåˆ—
+        while (q.empty() == false) {
             auto t = q.front();
             q.pop();
             cnt++;
 
-            for(const auto& val : graph[t])
-            {
+            for (const auto& val : g[t]) {
                 inDegree[val]--;
-                if(!inDegree[val])
+                if (inDegree[val] == 0) {
                     q.push(val);
+                } 
             }
         }
 

@@ -2,18 +2,18 @@
 using namespace std;
 
 void merge_sort(vector<int> &arr, int l, int r) {
-    // µİ¹é±ß½ç, 1¸öÔªËØ²»ÓÃÅÅĞò
+    // é€’å½’è¾¹ç•Œ, 1ä¸ªå…ƒç´ ä¸ç”¨æ’åº
     if (l >= r) {
         return;
     }
 
     int mid = (l + r) >> 1;
 
-    // 1.ÏÈ½«Á½±ßÅÅºÃĞò
+    // 1.å…ˆå°†ä¸¤è¾¹æ’å¥½åº
     merge_sort(arr, l, mid);
     merge_sort(arr, mid + 1, r);
 
-    // 2.¹é²¢
+    // 2.å½’å¹¶
     vector<int> temp;   
     int i = l, j = mid + 1;
     while (i <= mid && j <= r) {
@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
 {
     vector<int> arr = {3, 1, 5, 8, 0, 5, 2, 6};
     merge_sort(arr, 0, arr.size() - 1);
-    cout << "¹é²¢ÅÅĞò" << endl;
+    cout << "å½’å¹¶æ’åº" << endl;
     for (const auto& val : arr) {
         printf("%d ", val);
     }

@@ -2,22 +2,26 @@
 
 class MinStack {
 public:
-    stack<int> stk1, stk2;
+    // stk1维护正常的栈, stk2维护最小值
+    stack<int> stk1, stk2; 
     MinStack() {
 
     }
     
     void push(int val) {
         stk1.push(val);
-        if(stk2.empty() or stk2.top() >= val)
+        if (stk2.empty() == true || stk2.top() >= val) {
             stk2.push(val);
-    }   
+        }
+    }
     
     void pop() {
-        auto t = stk1.top();
+        int t = stk1.top();
         stk1.pop();
-        if(stk2.top() == t)
+
+        if (stk2.empty() == false && stk2.top() == t) {
             stk2.pop();
+        }
     }
     
     int top() {

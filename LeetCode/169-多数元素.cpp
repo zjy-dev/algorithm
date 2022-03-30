@@ -1,10 +1,10 @@
 #include"LeetCode.h"
 
-class Solution{
+class Solution {
 public:
-    int majorityElement(vector<int>& nums) 
-    {
+    int majorityElement(vector<int>& nums) {
         sort(nums.begin(), nums.end());
+
         return nums[nums.size() >> 1];
     }
 };

@@ -2,7 +2,7 @@
 using namespace std;
 
 void quick_sort(vector<int> &arr, int l, int r) {
-    // µÝ¹é±ß½ç, 1¸öÔªËØ²»ÓÃÅÅÐò
+    // é€’å½’è¾¹ç•Œ, 1ä¸ªå…ƒç´ ä¸ç”¨æŽ’åº
     if (l >= r) {
         return;
     }
@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 {
     vector<int> arr = {3, 1, 5, 8, 0, 5, 2, 6};
     quick_sort(arr, 0, arr.size() - 1);
-    cout << "¿ìËÙÅÅÐò" << endl;
+    cout << "å¿«é€ŸæŽ’åº" << endl;
     for (const auto& val : arr) {
         printf("%d ", val);
     }

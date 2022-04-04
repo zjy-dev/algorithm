@@ -23,7 +23,7 @@ void quick_sort(vector<int> &arr, int l, int r) {
 
 int main(int argc, char const *argv[])
 {
-    vector<int> arr = {3, 1, 5, 8, 0, 5, 2, 6};
+    vector<int> arr = {5, 2, 3, 1};
     quick_sort(arr, 0, arr.size() - 1);
     cout << "快速排序" << endl;
     for (const auto& val : arr) {

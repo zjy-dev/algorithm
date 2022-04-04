@@ -8,6 +8,7 @@ public:
 
         // dp[i]表示强制以i结尾的子序列递增子序列长度
         vector<int> dp(n, 1);
+        
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {

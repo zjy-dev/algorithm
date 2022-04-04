@@ -15,7 +15,7 @@ public:
         // 所以我们要不断尾删nums[i], 这样一来j前面所有数都比他大, 也就单减了
         deque<int> q;
 
-        // 预处理前k和数
+        // 预处理前k个数
         int n = nums.size();
         for (int i = 0; i < k; i++) {
             // 删除所有小于等于nums[i]的数

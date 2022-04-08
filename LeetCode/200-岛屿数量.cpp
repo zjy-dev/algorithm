@@ -1,9 +1,10 @@
 #include"LeetCode.h"
 
+// 并查集
 class Solution {
 public:
-    const int X[4] = {0, -1};
-    const int Y[4] = {-1, 0};
+    const int X[2] = {0, 1};
+    const int Y[2] = {1, 0};
     vector<int> p;
 
     // 返回p的祖先
@@ -44,7 +45,7 @@ public:
                     continue;
                 }
 
-                for (int t = 0; t < 4; t++) {
+                for (int t = 0; t < 2; t++) {
                     int tx = i + X[t], ty = j + Y[t];
 
                     if (tx < 0 || tx >= r || ty < 0 || ty >= c || grid[tx][ty] == '0') {
@@ -68,5 +69,53 @@ public:
         }
 
         return s.size();
+    }
+};
+
+// bfs
+class Solution {
+public: 
+    // 如果是bfs就必须四个方向都要, 因为它必须一次性搜到所有相连的'1'
+    int X[4] = {1, -1, 0, 0}, Y[4] = {0, 0, 1, -1};
+
+    int numIslands(vector<vector<char>>& grid) {
+        int row = grid.size(), col = grid[0].size();
+
+        int ans = 0;
+
+        for (int r = 0; r < row; r++) {
+            for (int c = 0; c < col; c++) {
+                if (grid[r][c] == '0') {
+                    continue;
+                }
+
+                // 以该点为起点bfs
+                queue<pair<int, int>> q;
+                q.push({r, c});
+                ans++;
+                grid[r][c] = '0';
+
+                while (q.empty() == false) {
+                    auto t = q.front();
+                    q.pop();
+
+                    int x = t.first, y = t.second;
+                    for (int t = 0; t < 4; t++) {
+                        int tx = x + X[t], ty = y + Y[t];
+
+                        // 寻找周围的'1', 为0或者越界就continue
+                        if (tx < 0 || tx >= row || ty < 0 || ty >= col 
+                            || grid[tx][ty] == '0') {
+                            continue;
+                        }
+
+                        grid[tx][ty] = '0';
+                        q.push({tx, ty});
+                    }
+                }
+            }
+        }
+
+        return ans;
     }
 };

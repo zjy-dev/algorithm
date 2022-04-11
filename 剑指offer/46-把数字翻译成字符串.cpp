@@ -1,7 +1,7 @@
 #include"LeetCode.h"
 
-// ×î´¾ÆÓµÄ¶şÎ¬dp
-// Ê±¿Õ¶¼ÊÇO(n)
+// æœ€æ·³æœ´çš„äºŒç»´dp
+// æ—¶ç©ºéƒ½æ˜¯O(n)
 class Solution {
 public:
     int translateNum(int num) {
@@ -9,7 +9,7 @@ public:
         string str = " " + to_string(num);
         int n = str.size() - 1;
 
-        // dp[k]±íÊ¾ÒÔk½áÎ²µÄ×Ö·û´®×î¶àµÄ±íÊ¾´ÎÊı
+        // dp[k]è¡¨ç¤ºä»¥kç»“å°¾çš„å­—ç¬¦ä¸²æœ€å¤šçš„è¡¨ç¤ºæ¬¡æ•°
         vector<int> dp(n + 1, 0);
 
         dp[0] = 1, dp[1] = 1;
@@ -25,7 +25,7 @@ public:
     }
 };
 
-// ¹ö¶¯Êı×éÓÅ»¯ºó¿Õ¼ä½µµ½O(1)
+// æ»šåŠ¨æ•°ç»„ä¼˜åŒ–åç©ºé—´é™åˆ°O(1)
 class Solution {
 public:
     int translateNum(int num) {
@@ -33,8 +33,8 @@ public:
         string str = " " + to_string(num);
         int n = str.size() - 1;
 
-        // ans×îĞ¡Ò²Ö»ÄÜ±íÊ¾dp[2]
-        // dp[1]Ö»ÄÜÌØÅĞµô
+        // ansæœ€å°ä¹Ÿåªèƒ½è¡¨ç¤ºdp[2]
+        // dp[1]åªèƒ½ç‰¹åˆ¤æ‰
         if (n == 1) {
             return 1;
         }
@@ -45,7 +45,7 @@ public:
         int p = 1, q = 1, ans = 0; 
 
         for (int i = 2; i <= n; i++) {
-            // ans´ú±íµÄdp[n]ÔÚÑ­»·¿ªÊ¼ÊÇ0
+            // ansä»£è¡¨çš„dp[n]åœ¨å¾ªç¯å¼€å§‹æ˜¯0
             ans = 0;
             string temp = str.substr(i - 1, 2);
             if (temp >= "10" && temp <= "25") {
@@ -53,7 +53,7 @@ public:
             }
             ans += q;
 
-            // p, q Ïòºó¹ö¶¯
+            // p, q å‘åæ»šåŠ¨
             p = q, q = ans;
         }
 

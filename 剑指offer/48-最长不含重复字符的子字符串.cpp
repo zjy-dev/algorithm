@@ -8,16 +8,16 @@ public:
         int ans = 0;
 
         for (int slow = 0, fast = 0; fast < n; fast++) {
-            // ¼ÙÉèÒªÒÔfast½áÎ², ÄÇÃ´hash(fast)±ØĞëÊÇfalse²Å¿ÉÒÔ
+            // å‡è®¾è¦ä»¥fastç»“å°¾, é‚£ä¹ˆhash(fast)å¿…é¡»æ˜¯falseæ‰å¯ä»¥
             while (hash[s[fast]] == true) {
                 hash[s[slow]] = false;
                 slow++;
             }
 
-            // ÏÖÔÚ¿ÉÒÔÒÔfast½áÎ²ÁË
+            // ç°åœ¨å¯ä»¥ä»¥fastç»“å°¾äº†
             hash[s[fast]] = true;
             
-            // ¸üĞÂ´ğ°¸
+            // æ›´æ–°ç­”æ¡ˆ
             ans = max(ans, fast - slow + 1);
         }
 

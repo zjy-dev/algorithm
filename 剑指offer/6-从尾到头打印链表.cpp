@@ -1,13 +1,13 @@
 #include"LeetCode.h"
 
 /**
- * Ê±¼ä¸´ÔÓ¶È -> O(n)
- * ¿Õ¼ä¸´ÔÓ¶È -> O(1)
+ * æ—¶é—´å¤æ‚åº¦ -> O(n)
+ * ç©ºé—´å¤æ‚åº¦ -> O(1)
  */
 class Solution {
 public:
     vector<int> reversePrint(ListNode* head) {
-        // ÌØÅÐ¿ÕÁ´±í
+        // ç‰¹åˆ¤ç©ºé“¾è¡¨
         if (head == NULL) {
             return {};
         }
@@ -15,22 +15,22 @@ public:
         // ans
         vector<int> ans;
 
-        // ·´×ªÁ´±í(Ë«Ö¸Õë)
-        // p -> headµÄÇ°Ò»¸ö½áµã
+        // åè½¬é“¾è¡¨(åŒæŒ‡é’ˆ)
+        // p -> headçš„å‰ä¸€ä¸ªç»“ç‚¹
         ListNode* p = NULL;
         while (head != NULL) {
-            // ±£´æhead->next
+            // ä¿å­˜head->next
             ListNode* ne = head->next;
 
-            // ¸Ä±ähead->nextÖ¸ÏòÎªÏòÇ°Ö¸
+            // æ”¹å˜head->nextæŒ‡å‘ä¸ºå‘å‰æŒ‡
             head->next = p;
 
-            // ¸üÐÂpºÍhead
+            // æ›´æ–°på’Œhead
             p = head;
             head = ne;
         }
 
-        // ·´×ªºóhead = NULL, p¾ÍÊÇÐÂÁ´±íµÄÍ·½áµã, ¼ÇÂ¼´ð°¸¼´¿É
+        // åè½¬åŽhead = NULL, på°±æ˜¯æ–°é“¾è¡¨çš„å¤´ç»“ç‚¹, è®°å½•ç­”æ¡ˆå³å¯
         while (p != NULL) {
             ans.push_back(p->val);
             p = p->next;

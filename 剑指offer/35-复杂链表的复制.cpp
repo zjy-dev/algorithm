@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    // ·ÀÖ¹ÖØ¸´¸´ÖÆ, Òª±ê¼ÇÃ¿Ò»¸ö¾É½áµãÊÇ·ñ±»¸´ÖÆ¹ı
+    // é˜²æ­¢é‡å¤å¤åˆ¶, è¦æ ‡è®°æ¯ä¸€ä¸ªæ—§ç»“ç‚¹æ˜¯å¦è¢«å¤åˆ¶è¿‡
     unordered_map<Node*, Node*> hash;
 
     Node* copyRandomList(Node* head) {
@@ -13,24 +13,24 @@ public:
         return dfs(head);
     }
 
-    // ¸´ÖÆÒ»¸öÒÔheadÎªÍ·µÄ¸´ÔÓÁ´±í, ²¢·µ»ØĞÂÁ´±íµÄÍ·Ö¸Õë
+    // å¤åˆ¶ä¸€ä¸ªä»¥headä¸ºå¤´çš„å¤æ‚é“¾è¡¨, å¹¶è¿”å›æ–°é“¾è¡¨çš„å¤´æŒ‡é’ˆ
     Node* dfs(Node* head) {
         if (head == NULL) {
             return NULL;
         }
-        // ²»ÄÜÖØ¸´¸´ÖÆ
+        // ä¸èƒ½é‡å¤å¤åˆ¶
         if (hash[head] != NULL) {
             return hash[head];
         }
 
-        // ¸´ÖÆÍ·½áµã
+        // å¤åˆ¶å¤´ç»“ç‚¹
         auto newHead = new Node(head->val);
 
-        // Ò»¶¨ÒªÔÚÕâÀï´æÈë¹şÏ£±í
-        // ÒÔ·ÀÖ¹½ÓÏÂÀ´µÄdfsÔÙ´ÎËÑµ½head, Ôì³ÉÖØ¸´¸´ÖÆ£¬ È»ºóÎŞÏŞµİ¹éÖÁÕ»Òç³ö
+        // ä¸€å®šè¦åœ¨è¿™é‡Œå­˜å…¥å“ˆå¸Œè¡¨
+        // ä»¥é˜²æ­¢æ¥ä¸‹æ¥çš„dfså†æ¬¡æœåˆ°head, é€ æˆé‡å¤å¤åˆ¶ï¼Œ ç„¶åæ— é™é€’å½’è‡³æ ˆæº¢å‡º
         hash[head] = newHead;
 
-        // µİ¹é¸´ÖÆheadµÄnextºÍrandom, ²¢ºÍnewHead½ÓÆğÀ´
+        // é€’å½’å¤åˆ¶headçš„nextå’Œrandom, å¹¶å’ŒnewHeadæ¥èµ·æ¥
         newHead->next = dfs(head->next);
         newHead->random = dfs(head->random);
 
@@ -82,7 +82,7 @@ public:
 
 
 
-// ²»ÓÃ¹Ü, ¹Ù·½Ìá¹©µÄÊı¾İ½á¹¹
+// ä¸ç”¨ç®¡, å®˜æ–¹æä¾›çš„æ•°æ®ç»“æ„
 class Node {
 public:
     int val;

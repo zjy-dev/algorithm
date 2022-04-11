@@ -3,7 +3,7 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
-        // ¿ÕÊ÷ÊÇ¶Ô³ÆµÄ
+        // ç©ºæ ‘æ˜¯å¯¹ç§°çš„
         if (root == NULL) {
             return true;
         }
@@ -11,8 +11,8 @@ public:
         return dfs(root->left, root->right);
     }
 
-    // rootÒªÏë¶Ô³Æ, rootµÄÁ½¿Ã×ÓÊ÷±ØÐë¶Ô³ÆµÄ
-    // ´Ëº¯ÊýÓÃÀ´ÅÐ¶ÏÁ½¿Ã×ÓÊ÷ÊÇ·ñ¶Ô³Æ
+    // rootè¦æƒ³å¯¹ç§°, rootçš„ä¸¤æ£µå­æ ‘å¿…é¡»å¯¹ç§°çš„
+    // æ­¤å‡½æ•°ç”¨æ¥åˆ¤æ–­ä¸¤æ£µå­æ ‘æ˜¯å¦å¯¹ç§°
     bool dfs(TreeNode* A, TreeNode* B) {
         if (A == NULL && B == NULL) {
             return true;
@@ -22,8 +22,8 @@ public:
             return false;
         }
 
-        // AºÍBÒªÏë¶Ô³Æ, AµÄ×ó×ÓÊ÷±ØÐëºÍBµÄÓÒ×ÓÊ÷¶Ô³Æ
-        // AµÄÓÒ×ÓÊ÷±ØÐëºÍBµÄ×ó×ÓÊ÷¶Ô³Æ(¿ÉÒÔ¹Û²ìÑùÀý)
+        // Aå’ŒBè¦æƒ³å¯¹ç§°, Açš„å·¦å­æ ‘å¿…é¡»å’ŒBçš„å³å­æ ‘å¯¹ç§°
+        // Açš„å³å­æ ‘å¿…é¡»å’ŒBçš„å·¦å­æ ‘å¯¹ç§°(å¯ä»¥è§‚å¯Ÿæ ·ä¾‹)
         return dfs(A->left, B->right) && dfs(A->right, B->left);
     }
 };

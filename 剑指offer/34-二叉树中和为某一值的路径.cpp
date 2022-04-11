@@ -15,9 +15,9 @@ public:
     }
 
     void dfs(vector<int> &v, int tar, TreeNode* root) {
-        // Ò¶×Ó½áµã×÷ÎªËÑË÷µÄ±ß½ç
+        // å¶å­ç»“ç‚¹ä½œä¸ºæœç´¢çš„è¾¹ç•Œ
         if (root->left == NULL && root->right == NULL) {
-            // ÅÐ¶ÏÊÇ·ñ³ÉÁ¢
+            // åˆ¤æ–­æ˜¯å¦æˆç«‹
             if (tar == root->val) {
                 v.push_back(tar);
                 ans.push_back(v);
@@ -26,10 +26,10 @@ public:
             return;
         }
 
-        // ½«tar¼ôÈ¥¸ù½ÚµãµÄÖµ, È»ºóÏò×óÓÒ×ÓÊ÷µÝ¹éËÑË÷
+        // å°†tarå‰ªåŽ»æ ¹èŠ‚ç‚¹çš„å€¼, ç„¶åŽå‘å·¦å³å­æ ‘é€’å½’æœç´¢
         tar -= root->val;
         if (root->left != NULL) {
-            // »ØËÝËã·¨, Ò»¶¨Òªpop_back()
+            // å›žæº¯ç®—æ³•, ä¸€å®šè¦pop_back()
             v.push_back(root->val);
             dfs(v, tar, root->left);
             v.pop_back();

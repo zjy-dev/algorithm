@@ -1,8 +1,8 @@
 #include"LeetCode.h"
 
 /**
- * Ê±¼ä¸´ÔÓ¶È => O(n)
- * ¿Õ¼ä¸´ÔÓ¶È => O(n)
+ * æ—¶é—´å¤æ‚åº¦ => O(n)
+ * ç©ºé—´å¤æ‚åº¦ => O(n)
  */
 class Solution {
 public:
@@ -13,7 +13,7 @@ public:
 
         int n = nums.size();
 
-        // dp[i]±íÊ¾ÒÔi½áÎ²µÄ×ÓÊı×éµÄ×î´óºÍ
+        // dp[i]è¡¨ç¤ºä»¥iç»“å°¾çš„å­æ•°ç»„çš„æœ€å¤§å’Œ
         vector<int> dp(n + 1);
         dp[0] = nums[0];
         int ans = dp[0];

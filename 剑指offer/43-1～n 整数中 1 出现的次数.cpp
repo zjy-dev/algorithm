@@ -9,25 +9,25 @@ public:
 
         int ans = 0;
 
-        // ½«¸ÃÊý»®·ÖÎªÈý¸ö²¿·Ö, high, curºÍlow
+        // å°†è¯¥æ•°åˆ’åˆ†ä¸ºä¸‰ä¸ªéƒ¨åˆ†, high, curå’Œlow
         int low = 0, high = n / 10, cur = n % 10;
 
-        // long long·ÀÖ¹Òç³ö
+        // long longé˜²æ­¢æº¢å‡º
         long long digit = 1;
 
-        // µ¥¶ÀµÄcurÎª0»òhighÎª0¶¼²»ÄÜÍ£Ö¹¼ÆËã
+        // å•ç‹¬çš„curä¸º0æˆ–highä¸º0éƒ½ä¸èƒ½åœæ­¢è®¡ç®—
         while (cur != 0 || high != 0) {
-            // ÎÞÂÛÈçºÎ, high(0 µ½ high - 1) * digit¸ö1ÊÇ¿Ï¶¨ÓÐµÄ
+            // æ— è®ºå¦‚ä½•, high(0 åˆ° high - 1) * digitä¸ª1æ˜¯è‚¯å®šæœ‰çš„
             ans += high * digit;
 
-            // ¸ù¾ÝcurµÄÖµÅÐ¶Ïµ±¸ßÎ»µÈÓÚhighÊ±µÄÇé¿ö
+            // æ ¹æ®curçš„å€¼åˆ¤æ–­å½“é«˜ä½ç­‰äºŽhighæ—¶çš„æƒ…å†µ
             if (cur == 1) {
                 ans += low + 1;
             } else if (cur > 1) {
                 ans += digit;
             }
             
-            // ¸üÐÂ
+            // æ›´æ–°
             low += cur * digit;
             cur = high % 10;
             high /= 10;

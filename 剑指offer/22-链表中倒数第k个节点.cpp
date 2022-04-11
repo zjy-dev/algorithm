@@ -1,21 +1,21 @@
 #include"LeetCode.h"
 
 /**
- * Ê±¼ä¸´ÔÓ¶È -> O(n), Ë«Ö¸Õë
- * ¿Õ¼ä¸´ÔÓ¶È -> O(1)
+ * æ—¶é—´å¤æ‚åº¦ -> O(n), åŒæŒ‡é’ˆ
+ * ç©ºé—´å¤æ‚åº¦ -> O(1)
  */
 class Solution {
 public:
     ListNode* getKthFromEnd(ListNode* head, int k) {
-        // Ë«Ö¸Õë, pÏÈ×ßk²½, È»ºóÍ¬²½ÒÆ¶¯pºÍhead, pÎªNULLÊ±head¾ÍÊÇµ¹ÊýµÚk¸ö½áµãÁË
+        // åŒæŒ‡é’ˆ, på…ˆèµ°kæ­¥, ç„¶åŽåŒæ­¥ç§»åŠ¨på’Œhead, pä¸ºNULLæ—¶headå°±æ˜¯å€’æ•°ç¬¬kä¸ªç»“ç‚¹äº†
         ListNode* p = head;
 
-        // ÎªÊ²Ã´while(k--)ÊÇÕýÈ·µÄ? ¿ÉÒÔÓÃÑùÀýÄ£ÄâÒ»ÏÂ
+        // ä¸ºä»€ä¹ˆwhile(k--)æ˜¯æ­£ç¡®çš„? å¯ä»¥ç”¨æ ·ä¾‹æ¨¡æ‹Ÿä¸€ä¸‹
         while (k--) {
             p = p->next;
         }
 
-        // Í¬²½ºóÒÆ¼´¿É
+        // åŒæ­¥åŽç§»å³å¯
         while (p != NULL) {
             head = head->next;
             p = p->next;

@@ -1,23 +1,23 @@
 #include"LeetCode.h"
 
 /**
- * Ê±¼ä¸´ÔÓ¶È -> O(n), Ë«Ö¸Õë
- * ¿Õ¼ä¸´ÔÓ¶È -> O(1)
+ * æ—¶é—´å¤æ‚åº¦ -> O(n), åŒæŒ‡é’ˆ
+ * ç©ºé—´å¤æ‚åº¦ -> O(1)
  */
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        // Ë«Ö¸Õë
+        // åŒæŒ‡é’ˆ
         ListNode* p = NULL;
 
         while (head != NULL) {
-            // ±£´æÒ»ÏÂheadµÄºóÒ»¸ö½áµã
+            // ä¿å­˜ä¸€ä¸‹headçš„åä¸€ä¸ªç»“ç‚¹
             ListNode* ne = head->next;
 
-            // ·´×ªÁ´±í
+            // åè½¬é“¾è¡¨
             head->next = p;
             
-            // Ë«Ö¸ÕëÍ¬²½ºóÒÆ
+            // åŒæŒ‡é’ˆåŒæ­¥åç§»
             p = head, head = ne;
         }
 

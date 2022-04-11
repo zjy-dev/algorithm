@@ -10,7 +10,7 @@ public:
             v.push_back(to_string(nums[i]));
         }
 
-        // Ì°ĞÄ, Ê¹×îÖÕµÄÅÅÁĞ·½Ê½ÖĞ, ¶ÔÈÎºÎÇ°ÃæµÄÊıs1ºÍºóÃæµÄÊıs2, Âú×ãs1 + s2 < s2 + s1
+        // è´ªå¿ƒ, ä½¿æœ€ç»ˆçš„æ’åˆ—æ–¹å¼ä¸­, å¯¹ä»»ä½•å‰é¢çš„æ•°s1å’Œåé¢çš„æ•°s2, æ»¡è¶³s1 + s2 < s2 + s1
         sort(v.begin(), v.end(), [](const string& s1, const string& s2) {
             return s1 + s2 < s2 + s1;
         });

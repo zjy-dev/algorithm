@@ -7,7 +7,7 @@ public:
         return root;
     }
 
-    // 递归的去交换左右子树即可
+    // 閫掑綊鐨勫幓浜ゆ崲宸﹀彸瀛愭爲鍗冲彲
     void dfs(TreeNode* root) {
         if (root == NULL) {
             return;

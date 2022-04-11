@@ -2,31 +2,31 @@
 
 class CQueue {
 public:
-    // Á½¸öÕ»
+    // ä¸¤ä¸ªæ ˆ
     stack<int> stk1, stk2;
     
-    // push¾ÍÖ±½ÓÍùstk1Àïpush¼´¿É
+    // pushå°±ç›´æ¥å¾€stk1é‡Œpushå³å¯
     void appendTail(int value) {
         stk1.push(value);
     }
     
-    // popÒª·ÖÇé¿öÌÖÂÛ, »ù±¾Ë¼Â·ÊÇ½«stk1Í¨¹ıstk2·­¸öµ×³¯Ìì
+    // popè¦åˆ†æƒ…å†µè®¨è®º, åŸºæœ¬æ€è·¯æ˜¯å°†stk1é€šè¿‡stk2ç¿»ä¸ªåº•æœå¤©
     int deleteHead() {
-        if (stk2.size() != 0) { // Èç¹ûstk2»¹Ã»³öÍê¶Ó, ¾ÍÖ±½Ó³ö¶Ó
+        if (stk2.size() != 0) { // å¦‚æœstk2è¿˜æ²¡å‡ºå®Œé˜Ÿ, å°±ç›´æ¥å‡ºé˜Ÿ
             int ans = stk2.top();
             stk2.pop();
             return ans;
-        } else if (stk1.size() != 0) { // ·ñÔòÈç¹ûstk1ÖĞÓĞÔªËØ, ¾Í·­¸öµ×³¯Ìì, È»ºó³ö¶Ó
+        } else if (stk1.size() != 0) { // å¦åˆ™å¦‚æœstk1ä¸­æœ‰å…ƒç´ , å°±ç¿»ä¸ªåº•æœå¤©, ç„¶åå‡ºé˜Ÿ
             while (!stk1.empty()) {
                 int t = stk1.top();
                 stk1.pop();
                 stk2.push(t);
             }
-            // Í¶»úÈ¡ÇÉĞĞÎª
+            // æŠ•æœºå–å·§è¡Œä¸º
             return deleteHead();
         }
 
-        // ¿Õ¶ÓÁĞ, ¸ù¾İÌâÄ¿ÒªÇó·µ»Ø-1
+        // ç©ºé˜Ÿåˆ—, æ ¹æ®é¢˜ç›®è¦æ±‚è¿”å›-1
         return -1;
     }
 };

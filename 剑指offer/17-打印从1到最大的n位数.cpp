@@ -1,14 +1,14 @@
 #include"LeetCode.h"
 
 /**
- * ÊôÊµÃ»¸ãÃ÷°×ÕâÌâÊÇ¸ÉÂï
+ * å±å®æ²¡ææ˜ç™½è¿™é¢˜æ˜¯å¹²å˜›
  */
 class Solution {
 public:
     vector<int> printNumbers(int n) {
         vector<int> ans;
 
-        // ·¢ÉúÉõÃ´ÊÂÁË, ÕâÃ´¸£Àû???
+        // å‘ç”Ÿç”šä¹ˆäº‹äº†, è¿™ä¹ˆç¦åˆ©???
         int maxNum = pow(10, n);
         for (int i = 1; i < maxNum; i++) {
             ans.push_back(i);

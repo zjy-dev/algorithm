@@ -5,7 +5,7 @@ public:
     int majorityElement(vector<int>& nums) {
         sort(nums.begin(), nums.end());
 
-        // Èç¹ûaµÄ³öÏÖ´ÎÊý³¬¹ý³¤¶ÈµÄÒ»°ë, ÔòÅÅÐòºó, ÖÐ¼äµÄÊýÒ»¶¨ÊÇa
+        // å¦‚æžœaçš„å‡ºçŽ°æ¬¡æ•°è¶…è¿‡é•¿åº¦çš„ä¸€åŠ, åˆ™æŽ’åºåŽ, ä¸­é—´çš„æ•°ä¸€å®šæ˜¯a
         return nums[nums.size() >> 1];
     }
 };

@@ -1,13 +1,13 @@
 #include"LeetCode.h"
 
 /**
- * Ê±¼ä¸´ÔÓ¶È -> O(n) 
- * ¿Õ¼ä¸´ÔÓ¶È -> O(1)
+ * æ—¶é—´å¤æ‚åº¦ -> O(n) 
+ * ç©ºé—´å¤æ‚åº¦ -> O(1)
  */
 class Solution {
 public:
     ListNode* deleteNode(ListNode* head, int val) {
-        // ¿¼ÂÇµ½É¾³ıÍ·½áµãµÄÇé¿ö, ¼ÓÒ»¸öÎ±Í·½áµãÄÜÏû³ı²»Ò»ÖÂĞÔ
+        // è€ƒè™‘åˆ°åˆ é™¤å¤´ç»“ç‚¹çš„æƒ…å†µ, åŠ ä¸€ä¸ªä¼ªå¤´ç»“ç‚¹èƒ½æ¶ˆé™¤ä¸ä¸€è‡´æ€§
         auto ans = new ListNode(0, head);
         
         auto p = ans;

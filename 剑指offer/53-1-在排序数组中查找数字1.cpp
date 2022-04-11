@@ -3,14 +3,14 @@
 class Solution {
 public:
     int search(vector<int>& nums, int tar) {
-        // ÅĞ¿Õ
+        // åˆ¤ç©º
         if (nums.size() == 0) {
             return 0;
         }
 
         int n = nums.size();
 
-        // ´Ó×óÍùÓÒÑ°ÕÒµÚÒ»¸ö´óÓÚµÈÓÚtarµÄÊı
+        // ä»å·¦å¾€å³å¯»æ‰¾ç¬¬ä¸€ä¸ªå¤§äºç­‰äºtarçš„æ•°
         int l = 0, r = n - 1, mid;
         while (l < r) {
             if (nums[mid = (l + r) >> 1] >= tar) {
@@ -20,15 +20,15 @@ public:
             }
         }
 
-        // ÌØÅĞÊı×éÖĞÃ»ÓĞ¸ÃÔªËØµÄÇé¿ö
+        // ç‰¹åˆ¤æ•°ç»„ä¸­æ²¡æœ‰è¯¥å…ƒç´ çš„æƒ…å†µ
         if (nums[l] != tar) {
             return 0;
         }
 
-        // ¼ÇÂ¼×óÇø¼ä
+        // è®°å½•å·¦åŒºé—´
         int ansL = l;
 
-        // ´ÓÓÒÍù×óÑ°ÕÒµÚÒ»¸öĞ¡ÓÚµÈÓÚtarµÄÊı
+        // ä»å³å¾€å·¦å¯»æ‰¾ç¬¬ä¸€ä¸ªå°äºç­‰äºtarçš„æ•°
         l = 0, r = n - 1;
         while (l < r) {
             if (nums[mid = (l + r + 1) >> 1] <= tar) {
@@ -38,7 +38,7 @@ public:
             }
         }
 
-        // ¼ÇÂ¼ÓÒ¶Ëµã
+        // è®°å½•å³ç«¯ç‚¹
         int ansR = l;
         return ansR - ansL + 1;
     }

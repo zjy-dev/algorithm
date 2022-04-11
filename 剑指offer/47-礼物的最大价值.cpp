@@ -3,7 +3,7 @@
 class Solution {
 public:
     int maxValue(vector<vector<int>>& grid) {
-        // ÓÉÌâ¸É, ²»ĞèÒªÌØÅĞ
+        // ç”±é¢˜å¹², ä¸éœ€è¦ç‰¹åˆ¤
         int row = grid.size(), col = grid[0].size();
 
 
@@ -17,7 +17,7 @@ public:
             dp[i][0] = dp[i - 1][0] + grid[i][0]; 
         }
 
-        // ×î¼òµ¥µÄdp
+        // æœ€ç®€å•çš„dp
         for (int i = 1; i < row; i++) {
             for (int j = 1; j < col; j++) {
                 dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];

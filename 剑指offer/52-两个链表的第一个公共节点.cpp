@@ -5,17 +5,17 @@ public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         int lenA = getLen(headA), lenB = getLen(headB);
 
-        // ÈÃlenA >= lenB
+        // è®©lenA >= lenB
         if (lenA < lenB) {
             return getIntersectionNode(headB, headA);
         } 
 
-        // AÏÈÍùºó×ßlenA - lenB²½
+        // Aå…ˆå¾€åŽèµ°lenA - lenBæ­¥
         for (int i = lenA - lenB; i != 0; i--) {
             headA = headA->next;
         }
 
-        // ¹²Í¬Íùºó×ß, Ö±µ½ÕÒµ½ÏàÍ¬µÄ½áµã
+        // å…±åŒå¾€åŽèµ°, ç›´åˆ°æ‰¾åˆ°ç›¸åŒçš„ç»“ç‚¹
         while (headA != headB) {
             headA = headA->next;
             headB = headB->next;

@@ -1,21 +1,21 @@
 #include"LeetCode.h"
 
 /**
- * Ê±¼ä¸´ÔÓ¶È -> O(n), n´Îµİ¹é½¨Á¢n¸ö½áµã
- * ¿Õ¼ä¸´ÔÓ¶È -> O(n), ¹şÏ£±íO(n) + µİ¹éO(n), µİ¹éÊÇO(n)µÄÒòÎªÃ¿Ò»´Îµİ¹é»á½¨Á¢Ò»¸ö½áµã
+ * æ—¶é—´å¤æ‚åº¦ -> O(n), næ¬¡é€’å½’å»ºç«‹nä¸ªç»“ç‚¹
+ * ç©ºé—´å¤æ‚åº¦ -> O(n), å“ˆå¸Œè¡¨O(n) + é€’å½’O(n), é€’å½’æ˜¯O(n)çš„å› ä¸ºæ¯ä¸€æ¬¡é€’å½’ä¼šå»ºç«‹ä¸€ä¸ªç»“ç‚¹
  */
 class Solution {
 public:
-    // ¹şÏ£±íÓÃÀ´Ô¤´¦ÀíÖĞĞòĞòÁĞ
+    // å“ˆå¸Œè¡¨ç”¨æ¥é¢„å¤„ç†ä¸­åºåºåˆ—
     unordered_map<int, int> hash;
 
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        // ÌØÅĞ¿ÕÊ÷
+        // ç‰¹åˆ¤ç©ºæ ‘
         if (preorder.size() == 0) {
             return NULL;
         }
 
-        // ÓÃ¹şÏ£±íÔ¤´¦ÀíÖĞĞòĞòÁĞ
+        // ç”¨å“ˆå¸Œè¡¨é¢„å¤„ç†ä¸­åºåºåˆ—
         int n = preorder.size();
         for (int i = 0; i < n; i++) {
             hash[inorder[i]] = i;
@@ -26,21 +26,21 @@ public:
     }
 
     TreeNode* dfs(vector<int>& pre, vector<int>& in, int preL, int preR, int inL, int inR) {
-        // ±ß½ç
+        // è¾¹ç•Œ
         if (preL > preR) {
             return NULL;
         }
 
-        // ¸ù½áµã
+        // æ ¹ç»“ç‚¹
         TreeNode* root = new TreeNode(pre[preL]);
 
-        // ´Ó¹şÏ£±íÈ¡³öÖĞĞòĞòÁĞÖĞ¸ùµÄÎ»ÖÃ
+        // ä»å“ˆå¸Œè¡¨å–å‡ºä¸­åºåºåˆ—ä¸­æ ¹çš„ä½ç½®
         int rootPos = hash[root->val];
 
-        // Í¨¹ıÖĞĞòĞòÁĞÖĞ¸ùµÄÎ»ÖÃÀ´Ëã³ö×óÓÒ×ÓÊ÷³¤¶È
+        // é€šè¿‡ä¸­åºåºåˆ—ä¸­æ ¹çš„ä½ç½®æ¥ç®—å‡ºå·¦å³å­æ ‘é•¿åº¦
         int lenL = rootPos - inL, lenR = inR - rootPos; 
 
-        // µİ¹é¹¹Ôì×óÓÒ×ÓÊ÷
+        // é€’å½’æ„é€ å·¦å³å­æ ‘
         root->left = dfs(pre, in, preL + 1, preL + lenL, inL, rootPos - 1);
         root->right = dfs(pre, in, preL + lenL + 1, preR, rootPos + 1, inR);
         

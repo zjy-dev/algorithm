@@ -1,8 +1,4 @@
-select
-    p.firstName, p.lastName, a.city, a.state
-from
-    address a 
-right join 
-    person p
-on 
-    a.personId = p.personId;
+select firstName, lastName, city, state
+from address as a
+right join person as p
+on p.personId = a.personId

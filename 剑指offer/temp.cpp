@@ -1,5 +1,3 @@
 using namespace std;
 
-int main() {
-    cout << "55";
-}
+int main() { cout << "55"; }

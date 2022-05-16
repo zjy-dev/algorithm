@@ -1,29 +1,27 @@
-#include"LeetCode.h"
+#include "LeetCode.h"
 
 class Solution {
 public:
-    bool isNStraightHand(vector<int>& nums, int len) 
-    {
-        int n = nums.size();
-        unordered_map<int, int> hash;
+  bool isNStraightHand(vector<int> &nums, int len) {
+    int n = nums.size();
+    unordered_map<int, int> hash;
 
-        for(const auto& val : nums)
-            hash[val]++;
-        
-        sort(nums.begin(), nums.end());
+    for (const auto &val : nums)
+      hash[val]++;
 
-        for(int i = 0; i < n; i++)
-        {
-            if(!hash[nums[i]])
-                continue;
+    sort(nums.begin(), nums.end());
 
-            for(int j = 0; j < len; j++)
-                if(!hash[nums[i] + j])
-                    return false;
-                else
-                    hash[nums[i] + j]--;
-        }
+    for (int i = 0; i < n; i++) {
+      if (!hash[nums[i]])
+        continue;
 
-        return true;
+      for (int j = 0; j < len; j++)
+        if (!hash[nums[i] + j])
+          return false;
+        else
+          hash[nums[i] + j]--;
     }
-};    
+
+    return true;
+  }
+};

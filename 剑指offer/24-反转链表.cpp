@@ -1,4 +1,4 @@
-#include"LeetCode.h"
+#include "LeetCode.h"
 
 /**
  * 时间复杂度 -> O(n), 双指针
@@ -6,21 +6,21 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        // 双指针
-        ListNode* p = NULL;
+  ListNode *reverseList(ListNode *head) {
+    // 双指针
+    ListNode *p = NULL;
 
-        while (head != NULL) {
-            // 保存一下head的后一个结点
-            ListNode* ne = head->next;
+    while (head != NULL) {
+      // 保存一下head的后一个结点
+      ListNode *ne = head->next;
 
-            // 反转链表
-            head->next = p;
-            
-            // 双指针同步后移
-            p = head, head = ne;
-        }
+      // 反转链表
+      head->next = p;
 
-        return p;
+      // 双指针同步后移
+      p = head, head = ne;
     }
+
+    return p;
+  }
 };

@@ -1,19 +1,18 @@
-#include"LeetCode.h"
-
+#include "LeetCode.h"
 
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        ListNode *p = NULL;
+  ListNode *reverseList(ListNode *head) {
+    ListNode *p = NULL;
 
-        while (head != NULL) {
-            auto ne = head->next;
+    while (head != NULL) {
+      auto ne = head->next;
 
-            head->next = p;
+      head->next = p;
 
-            p = head, head = ne;
-        }
-
-        return p;
+      p = head, head = ne;
     }
+
+    return p;
+  }
 };

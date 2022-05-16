@@ -1,17 +1,13 @@
-#include"LeetCode.h"
+#include "LeetCode.h"
 
 class Solution {
 public:
-    TreeNode* invertTree(TreeNode* root) 
-    {
-        dfs(root);
-    }
+  TreeNode *invertTree(TreeNode *root) { dfs(root); }
 
-    void dfs(TreeNode* root)
-    {
-        if(!root)
-            return;
-        swap(root->left, root->right);
-        dfs(root->left), dfs(root->right);
-    }
+  void dfs(TreeNode *root) {
+    if (!root)
+      return;
+    swap(root->left, root->right);
+    dfs(root->left), dfs(root->right);
+  }
 };

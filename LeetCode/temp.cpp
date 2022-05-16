@@ -2,8 +2,5 @@
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-    string a, b, c, d;
-    while (cin >> a >> b >> c >> d) {
-        cout << ""
-    }
+  // 000000000001 00001 000 00000 0010011
 }

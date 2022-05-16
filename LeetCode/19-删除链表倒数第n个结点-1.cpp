@@ -1,20 +1,19 @@
-#include"LeetCode.h"
+#include "LeetCode.h"
 
-class Solution{
+class Solution {
 public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
-        auto p = head, ans = head;
-        while(n--)
-            head = head->next;
+  ListNode *removeNthFromEnd(ListNode *head, int n) {
+    auto p = head, ans = head;
+    while (n--)
+      head = head->next;
 
-        if(!head)
-            return ans->next;
+    if (!head)
+      return ans->next;
 
-        while(head->next)
-            head = head->next, p = p->next;
+    while (head->next)
+      head = head->next, p = p->next;
 
-        p->next = p->next->next;
-        return ans;
-    }
+    p->next = p->next->next;
+    return ans;
+  }
 };
-
